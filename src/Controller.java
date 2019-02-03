@@ -26,13 +26,13 @@ public class Controller implements Initializable
     @FXML
     private BorderPane borderPane;
     @FXML
-    private Label labelCurrentFile;
+    private TextField textCurrentFile;
     @FXML
     private ListView<File> listViewFiles;
     @FXML
     private ListView<String> listViewFormats;
     @FXML
-    private ProgressBar progBarCurrent, getProgBarTotal;
+    private ProgressBar progBarCurrent, progBarTotal;
 
 
     private ObservableList<File> files;
@@ -53,10 +53,14 @@ public class Controller implements Initializable
 
         open_ext = new ArrayList<>();
         open_ext.add("*.mp4"); open_ext.add("*.avi"); open_ext.add("*.mkv"); open_ext.add("*.wmv");
-        formats = FXCollections.observableArrayList("mp4", "avi", "mkv");
+        formats = FXCollections.observableArrayList("avi", "mp4", "mkv");
         listViewFormats.setItems(formats);
         listViewFormats.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         files = FXCollections.observableArrayList();
+
+        str_format = "avi";
+        listViewFormats.getSelectionModel().select(0);
+        textCurrentFile.setEditable(false);
         //Stop.setDisable(true);
     }
 
@@ -95,9 +99,12 @@ public class Controller implements Initializable
 
     @FXML
     public void clear_queue(ActionEvent event)
+
     {
         files.clear();
     }
+
+
 
     @FXML
     public void get_selected_format(MouseEvent event)
@@ -113,9 +120,11 @@ public class Controller implements Initializable
     @FXML
     public void convert_clicked(ActionEvent event)
     {
-        op= new ConvertOp(files, str_format, labelCurrentFile, progBarCurrent, getProgBarTotal, list_durations, Open, Start, Stop, Clear);
+
+        op= new ConvertOp(files, str_format, textCurrentFile, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear);
         op.setDaemon(true);
         op.start();
+
     }
 
 }

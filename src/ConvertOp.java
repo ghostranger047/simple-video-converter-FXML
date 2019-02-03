@@ -2,9 +2,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 
 import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,18 +14,19 @@ public class ConvertOp extends Thread
 {
     private ObservableList<File> files;
     private String str_format;
-    private Label labelCurrentFile;
+    private TextField textCurrentFile;
     private ProgressBar progBarCurrent, progBarTotal;
     private List<Double> durations;
     private Button Open, Start, Stop, Clear;
 
 
-    public ConvertOp(ObservableList<File> files, String str_format, Label labelCurrentFile, ProgressBar progBarCurrent, ProgressBar progBarTotal,
+
+    public ConvertOp(ObservableList<File> files, String str_format, TextField textCurrentFile, ProgressBar progBarCurrent, ProgressBar progBarTotal,
                      List<Double> durations, Button Open, Button Start, Button Stop, Button Clear)
     {
         this.files = files;
         this.str_format =str_format;
-        this.labelCurrentFile = labelCurrentFile;
+        this.textCurrentFile = textCurrentFile;
         this.progBarCurrent = progBarCurrent;
         this.progBarTotal = progBarTotal;
         this.durations = durations;
@@ -33,7 +35,8 @@ public class ConvertOp extends Thread
         this.Start = Start;
         this.Stop = Stop;
         this.Clear = Clear;
-        //progBarCurrent.setProgress(45/100.0);
+
+
 
 
     }
@@ -62,13 +65,23 @@ public class ConvertOp extends Thread
 
        toggle_buttons(1);
        int i = 0;
+
+       double tot_dur = 0.0;
+        for(double dub : durations)
+        {
+            tot_dur += dub;
+        }
+        System.out.println(tot_dur);
+        progBarTotal.setProgress(0.0);
+
        for(File file : files)
        {
+           //System.out.println(tot_dur);
 
+           progBarCurrent.setProgress(0.0);
            String currentLoc = file.getAbsoluteFile().toString();
-           Double current_duration = durations.get(i);
 
-           labelCurrentFile.setText(currentLoc);
+           textCurrentFile.setText(currentLoc);
 
            List<String> arg = new ArrayList<>();
            String currentFile = currentLoc.substring(currentLoc.lastIndexOf('/')+1);
@@ -81,7 +94,6 @@ public class ConvertOp extends Thread
 
 
 
-
             try
             {
                 Process process = p.start();
@@ -89,21 +101,54 @@ public class ConvertOp extends Thread
 
                 while(sc.hasNextLine())
                 {
-                    System.out.println(sc.nextLine());
+                    String op = sc.nextLine();
+                    //System.out.println(op.length());
+
+
+                    if(op.indexOf("time=") != -1)
+                    {
+                        String progress = op.substring(op.indexOf("time=")+5, op.lastIndexOf("time")+13);
+                        //System.out.println(progress);
+                        String time[] = progress.split(":");
+                        double dou_progress = (3600 * Double.parseDouble(time[0])) +
+                                (60 * Double.parseDouble(time[1])) + Double.parseDouble(time[2]);
+                        //System.out.println(dou_progress);
+
+
+                        progBarCurrent.setProgress(dou_progress/durations.get(i));
+
+                        if(i == 0)
+                        {
+                            //System.out.println(dou_progress/tot_dur);
+                            progBarTotal.setProgress(dou_progress/tot_dur);
+                        }
+
+                        else
+                        {
+                            //System.out.println((durations.get(i-1) + dou_progress)/tot_dur);
+                            progBarTotal.setProgress((durations.get(i-1) + dou_progress)/tot_dur);
+                        }
+
+                        //progBarTotal.setProgress(total_done/tot_dur);
+
+                    }
+
                 }
                 process.waitFor();
             }
             catch(Exception e)
             {
-                System.out.println(e);
+                //System.out.println(e);
                 toggle_buttons(0);
             }
+            i = i+1;
 
-            i++;
 
        }
        System.out.println("Ended");
+       textCurrentFile.setText("Task Completed");
        toggle_buttons(0);
+
        //files.clear();
     }
 }
