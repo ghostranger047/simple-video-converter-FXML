@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -8,6 +9,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -15,6 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <center>
@@ -59,7 +62,57 @@
           </Tab>
           <Tab text="Additional Settings">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane layoutX="105.0" layoutY="64.0" prefHeight="367.0" prefWidth="609.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <AnchorPane prefHeight="367.0" prefWidth="583.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label layoutY="14.0" text="Frame Rate:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="496.0" AnchorPane.topAnchor="14.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="FrameRate" layoutX="99.0" layoutY="10.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="10.0" />
+                                    <Label layoutX="-4.0" layoutY="59.0" text="CRF:" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="551.0" AnchorPane.topAnchor="59.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="Slider" layoutX="99.0" layoutY="60.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+                                    <TextField fx:id="Crf" layoutX="99.0" layoutY="84.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="84.0">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label layoutY="131.0" prefHeight="16.0" prefWidth="52.0" text="Preset:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="531.0" AnchorPane.topAnchor="131.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="Preset" layoutX="99.0" layoutY="127.0" prefWidth="150.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="127.0" />
+                                    <Text layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Output Destination:" AnchorPane.bottomAnchor="13.93408203125" AnchorPane.leftAnchor="0.0" />
+                                    <TextField fx:id="textDest" layoutX="135.0" layoutY="319.0" prefHeight="26.0" prefWidth="365.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="83.0" />
+                                    <Button layoutX="517.0" layoutY="319.0" mnemonicParsing="false" onAction="#set_destination" text="Browse" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <left>
+                              <AnchorPane prefHeight="367.0" prefWidth="12.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Separator layoutX="3.0" layoutY="19.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </left>
+                           <right>
+                              <AnchorPane prefHeight="367.0" prefWidth="14.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Separator layoutX="4.0" layoutY="57.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </right>
+                        </BorderPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
@@ -100,4 +153,11 @@
         </menus>
       </MenuBar>
    </top>
+   <bottom>
+      <AnchorPane prefHeight="13.0" prefWidth="623.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator layoutX="99.0" layoutY="-1.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

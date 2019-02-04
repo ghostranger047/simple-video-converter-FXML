@@ -12,32 +12,15 @@ import java.util.Scanner;
 
 public class ConvertOp extends Thread
 {
-    private ObservableList<File> files;
-    private String str_format;
-    private TextField textCurrentFile;
-    private ProgressBar progBarCurrent, progBarTotal;
-    private List<Double> durations;
-    private Button Open, Start, Stop, Clear;
+
+    UIElements Ui;
 
 
 
-    public ConvertOp(ObservableList<File> files, String str_format, TextField textCurrentFile, ProgressBar progBarCurrent, ProgressBar progBarTotal,
-                     List<Double> durations, Button Open, Button Start, Button Stop, Button Clear)
+    public ConvertOp(UIElements ui)
     {
-        this.files = files;
-        this.str_format =str_format;
-        this.textCurrentFile = textCurrentFile;
-        this.progBarCurrent = progBarCurrent;
-        this.progBarTotal = progBarTotal;
-        this.durations = durations;
 
-        this.Open = Open;
-        this.Start = Start;
-        this.Stop = Stop;
-        this.Clear = Clear;
-
-
-
+        this .Ui = ui;
 
     }
     public void toggle_buttons(int n)
@@ -52,10 +35,10 @@ public class ConvertOp extends Thread
         {
             fl1 = false; fl2 = true;
         }
-       Open.setDisable(fl1);
-       Start.setDisable(fl1);
-       Clear.setDisable(fl1);
-       Stop.setDisable(fl2);
+       Ui.Open.setDisable(fl1);
+       Ui.Start.setDisable(fl1);
+       Ui.Clear.setDisable(fl1);
+       Ui.Stop.setDisable(fl2);
 
     }
 
@@ -63,32 +46,37 @@ public class ConvertOp extends Thread
     public void run()
     {
 
+       //System.out.println(Ui.durations);
        toggle_buttons(1);
        int i = 0;
 
        double tot_dur = 0.0;
-        for(double dub : durations)
+        for(double dub : Ui.durations)
         {
             tot_dur += dub;
         }
         System.out.println(tot_dur);
-        progBarTotal.setProgress(0.0);
+        Ui.progBarTotal.setProgress(0.0);
 
-       for(File file : files)
+       for(File file : Ui.files)
        {
            //System.out.println(tot_dur);
 
-           progBarCurrent.setProgress(0.0);
+           Ui.progBarCurrent.setProgress(0.0);
            String currentLoc = file.getAbsoluteFile().toString();
 
-           textCurrentFile.setText(currentLoc);
+
+
+           Ui.textCurrentFile.setText(currentLoc);
 
            List<String> arg = new ArrayList<>();
            String currentFile = currentLoc.substring(currentLoc.lastIndexOf('/')+1);
            currentFile = currentFile.substring(0, currentFile.lastIndexOf('.'));
 
            arg.add("ffmpeg");
-           arg.add("-i"); arg.add(currentLoc); arg.add("/home/avenger047/Desktop/" + currentFile + "." + str_format);
+           String str_op = Ui.dest.getPath() + "/" + currentFile + "." + Ui.str_format;
+           arg.add("-i"); arg.add(currentLoc); arg.add(str_op);
+           System.out.println(str_op);
            ProcessBuilder p = new ProcessBuilder(arg);
            System.out.println(currentFile);
 
@@ -115,18 +103,18 @@ public class ConvertOp extends Thread
                         //System.out.println(dou_progress);
 
 
-                        progBarCurrent.setProgress(dou_progress/durations.get(i));
+                        Ui.progBarCurrent.setProgress(dou_progress/Ui.durations.get(i));
 
                         if(i == 0)
                         {
                             //System.out.println(dou_progress/tot_dur);
-                            progBarTotal.setProgress(dou_progress/tot_dur);
+                            Ui.progBarTotal.setProgress(dou_progress/tot_dur);
                         }
 
                         else
                         {
                             //System.out.println((durations.get(i-1) + dou_progress)/tot_dur);
-                            progBarTotal.setProgress((durations.get(i-1) + dou_progress)/tot_dur);
+                            Ui.progBarTotal.setProgress((Ui.durations.get(i-1) + dou_progress)/tot_dur);
                         }
 
                         //progBarTotal.setProgress(total_done/tot_dur);
@@ -146,7 +134,7 @@ public class ConvertOp extends Thread
 
        }
        System.out.println("Ended");
-       textCurrentFile.setText("Task Completed");
+       Ui.textCurrentFile.setText("Task Completed");
        toggle_buttons(0);
 
        //files.clear();

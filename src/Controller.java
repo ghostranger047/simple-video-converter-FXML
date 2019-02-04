@@ -5,8 +5,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -26,13 +28,19 @@ public class Controller implements Initializable
     @FXML
     private BorderPane borderPane;
     @FXML
-    private TextField textCurrentFile;
+    private TextField textCurrentFile, Crf, FrameRate, textDest;
     @FXML
     private ListView<File> listViewFiles;
     @FXML
     private ListView<String> listViewFormats;
     @FXML
     private ProgressBar progBarCurrent, progBarTotal;
+    @FXML
+    private Slider Slider;
+    @FXML
+    private ComboBox<String> Preset;
+
+    private File dest;
 
 
     private ObservableList<File> files;
@@ -43,6 +51,10 @@ public class Controller implements Initializable
     private String str_format;
 
     private ConvertOp op;
+
+    Stage stg;
+
+    UIElements ui;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -62,6 +74,20 @@ public class Controller implements Initializable
         listViewFormats.getSelectionModel().select(0);
         textCurrentFile.setEditable(false);
         //Stop.setDisable(true);
+        Crf.setMaxWidth(40); Crf.setMaxHeight(30);
+        Crf.setEditable(false);
+
+        FrameRate.setMaxWidth(40);FrameRate.setMaxHeight(30);
+        FrameRate.setText("30");
+
+        Slider.setValue(22);
+        Crf.setText(Integer.toString((int)Slider.getValue()));
+
+        Slider.setMin(0); Slider.setMax(100);
+
+        Preset.getItems().addAll("ultrafast", 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow')
+
+
     }
 
     @FXML
@@ -71,7 +97,7 @@ public class Controller implements Initializable
         FileChooser fc = new FileChooser();
         fc.setTitle("Videos");
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Videos", open_ext));
-        Stage stg = (Stage)borderPane.getScene().getWindow();
+        stg = (Stage)borderPane.getScene().getWindow();
         List<File> fs = fc.showOpenMultipleDialog(stg);
 
 
@@ -94,7 +120,8 @@ public class Controller implements Initializable
 
         }
 
-
+        //ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear, textCurrentFile, dest.getAbsolutePath()+"/");
+        System.out.println(dest.getAbsolutePath());
     }
 
     @FXML
@@ -120,11 +147,32 @@ public class Controller implements Initializable
     @FXML
     public void convert_clicked(ActionEvent event)
     {
+        ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear, textCurrentFile, dest, FrameRate, Crf, Preset.getValue());
 
-        op= new ConvertOp(files, str_format, textCurrentFile, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear);
+
+        op= new ConvertOp(ui);
+
         op.setDaemon(true);
         op.start();
 
+    }
+
+    @FXML
+    public void set_destination(ActionEvent event)
+    {
+        DirectoryChooser d =new DirectoryChooser();
+        d.setTitle("Destination");
+
+        stg = (Stage)borderPane.getScene().getWindow();
+        dest = d.showDialog(stg);
+        textDest.setText(dest.getPath() + "/");
+
+    }
+
+    @FXML
+    public void set_crf(MouseEvent event)
+    {
+        Crf.setText(Long.toString(Math.round(Slider.getValue())));
     }
 
 }
