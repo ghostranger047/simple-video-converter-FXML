@@ -17,6 +17,8 @@ public class UIElements
     public static Button Open, Start, Stop, Clear;
     public static File dest;
 
+    int flag;
+
 
 
     public UIElements(ObservableList<File> files, String str_format, ProgressBar progBarCurrent, ProgressBar progBarTotal,
@@ -40,5 +42,6 @@ public class UIElements
         this.dest = dest;
         this.Crf = Crf;
         this.Preset = Preset;
+        flag = 1;
     }
 }

@@ -118,6 +118,7 @@ public class Controller implements Initializable
         listViewFiles.setItems(files);
         listViewFiles.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
+
         FFProbe fprobe = new FFProbe();
         try
         {
@@ -131,8 +132,7 @@ public class Controller implements Initializable
 
         }
 
-        //ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear, textCurrentFile, dest.getAbsolutePath()+"/");
-        //System.out.println(dest.getAbsolutePath());
+
     }
 
     @FXML
@@ -179,13 +179,28 @@ public class Controller implements Initializable
         ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear,
                 textCurrentFile, dest, FrameRate, Crf, Preset.getValue());
 
-
+        ui.flag = 1;
 
         op= new ConvertOp(ui);
 
         op.setDaemon(true);
         op.start();
 
+    }
+
+
+    @FXML
+    public void stop(ActionEvent event)
+    {
+        ui.flag = 0;
+        op.interrupt();
+        textCurrentFile.setText("Interrupted by User!");
+        Stop.setDisable(true);
+        Open.setDisable(false);
+        Start.setDisable(false);
+        Clear.setDisable(false);
+        progBarCurrent.setProgress(0.0);
+        progBarTotal.setProgress(0.0);
     }
 
     @FXML
@@ -206,6 +221,30 @@ public class Controller implements Initializable
     public void set_crf(MouseEvent event)
     {
         Crf.setText(Long.toString(Math.round(Slider.getValue())));
+    }
+
+    @FXML
+    public void close(ActionEvent event)
+    {
+
+
+        System.exit(1);
+
+    }
+
+    @FXML
+    public void about(ActionEvent event)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("Just a hobby project");
+        alert.setContentText("Simple video converter\n" +
+                "Uses FFMPEG \n All major video format supported");
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
     }
 
 }

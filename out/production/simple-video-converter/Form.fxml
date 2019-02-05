@@ -14,6 +14,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -52,7 +53,7 @@
                         <Label layoutX="-1.0" layoutY="265.0" text="Total:" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" />
                         <Button fx:id="Open" layoutX="72.0" layoutY="315.0" mnemonicParsing="false" onAction="#open_file" prefHeight="26.0" prefWidth="55.0" text="Open" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="72.0" />
                         <Button fx:id="Start" layoutX="201.0" layoutY="315.0" mnemonicParsing="false" onAction="#convert_clicked" text="Start" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="201.0" />
-                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" text="Stop" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="235.0" />
+                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" onAction="#stop" text="Stop" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="235.0" />
                         <Button fx:id="Clear" layoutX="442.0" layoutY="315.0" mnemonicParsing="false" onAction="#clear_queue" text="Clear Queue" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="72.0" />
                         <Separator layoutY="311.0" prefHeight="0.0" prefWidth="609.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <TextField fx:id="textCurrentFile" layoutX="92.0" layoutY="209.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="0.0" />
@@ -73,24 +74,24 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="FrameRate" layoutX="99.0" layoutY="10.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="10.0" />
+                                    <TextField fx:id="FrameRate" layoutX="99.0" layoutY="10.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="10.0" />
                                     <Label layoutX="-4.0" layoutY="98.0" prefHeight="18.0" prefWidth="45.0" text="CRF:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="538.0" AnchorPane.topAnchor="98.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Slider fx:id="Slider" layoutX="99.0" layoutY="99.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0" />
+                                    <Slider fx:id="Slider" layoutX="99.0" layoutY="99.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0" />
                                     <TextField fx:id="Crf" layoutX="100.0" layoutY="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="75.0">
                                        <font>
                                           <Font size="12.0" />
                                        </font>
                                     </TextField>
-                                    <Label layoutX="6.0" layoutY="144.0" prefHeight="16.0" prefWidth="52.0" text="Preset:" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="525.0" AnchorPane.topAnchor="144.0">
+                                    <Label layoutX="6.0" layoutY="144.0" prefHeight="16.0" prefWidth="52.0" text="Preset:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="525.0" AnchorPane.topAnchor="144.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="Preset" layoutX="103.0" layoutY="140.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="144.0" />
+                                    <ComboBox fx:id="Preset" layoutX="103.0" layoutY="140.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="144.0" />
                                     <Text layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Output Destination:" AnchorPane.bottomAnchor="13.93408203125" AnchorPane.leftAnchor="0.0" />
                                     <TextField fx:id="textDest" layoutX="135.0" layoutY="319.0" prefHeight="26.0" prefWidth="365.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="83.0" />
                                     <Button layoutX="517.0" layoutY="319.0" mnemonicParsing="false" onAction="#set_destination" text="Browse" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="0.0" />
@@ -135,19 +136,24 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="F_ile">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="MenuFile" onAction="#open_file" text="Open">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+              <MenuItem fx:id="MenuClose" mnemonicParsing="false" onAction="#close" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="H_elp">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
         </menus>

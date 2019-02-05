@@ -14,6 +14,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -52,7 +53,7 @@
                         <Label layoutX="-1.0" layoutY="265.0" text="Total:" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" />
                         <Button fx:id="Open" layoutX="72.0" layoutY="315.0" mnemonicParsing="false" onAction="#open_file" prefHeight="26.0" prefWidth="55.0" text="Open" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="72.0" />
                         <Button fx:id="Start" layoutX="201.0" layoutY="315.0" mnemonicParsing="false" onAction="#convert_clicked" text="Start" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="201.0" />
-                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" text="Stop" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="235.0" />
+                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" onAction="#stop" text="Stop" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="235.0" />
                         <Button fx:id="Clear" layoutX="442.0" layoutY="315.0" mnemonicParsing="false" onAction="#clear_queue" text="Clear Queue" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="72.0" />
                         <Separator layoutY="311.0" prefHeight="0.0" prefWidth="609.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <TextField fx:id="textCurrentFile" layoutX="92.0" layoutY="209.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="0.0" />
@@ -135,19 +136,24 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="F_ile">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="MenuFile" onAction="#open_file" text="Open">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+              <MenuItem fx:id="MenuClose" mnemonicParsing="false" onAction="#close" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="H_elp">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
         </menus>

@@ -105,7 +105,8 @@ public class ConvertOp extends Thread
                 {
                     String op = sc.nextLine();
                     //System.out.println(op.length());
-
+                    if(Ui.flag == 0)
+                        return;
 
                     if(op.indexOf("time=") != -1)
                     {
