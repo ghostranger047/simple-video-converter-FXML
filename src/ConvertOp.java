@@ -130,8 +130,8 @@ public class ConvertOp extends Thread
            arg.add("ffmpeg"); arg.add("-i");
            arg.add(currentLoc);
 
-           String args = "-crf " + Ui.Crf.getText() +
-                   " -r " + Ui.FrameRate.getText() + " -preset " + Ui.Preset;
+           String args = "-c:v libx264 -preset " + Ui.Preset +
+                   " -crf " + Ui.Crf.getText() + " -r " + Ui.FrameRate.getText();
 
            arg.addAll(Arrays.asList(args.split(" ")));
            arg.add(str_op);
