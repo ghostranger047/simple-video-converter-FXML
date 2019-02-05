@@ -73,24 +73,24 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="FrameRate" layoutX="99.0" layoutY="10.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.leftAnchor="99.0" AnchorPane.topAnchor="10.0" />
+                                    <TextField fx:id="FrameRate" layoutX="99.0" layoutY="10.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="10.0" />
                                     <Label layoutX="-4.0" layoutY="98.0" prefHeight="18.0" prefWidth="45.0" text="CRF:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="538.0" AnchorPane.topAnchor="98.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Slider fx:id="Slider" layoutX="99.0" layoutY="99.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0" />
+                                    <Slider fx:id="Slider" layoutX="99.0" layoutY="99.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0" />
                                     <TextField fx:id="Crf" layoutX="100.0" layoutY="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="75.0">
                                        <font>
                                           <Font size="12.0" />
                                        </font>
                                     </TextField>
-                                    <Label layoutX="6.0" layoutY="144.0" prefHeight="16.0" prefWidth="52.0" text="Preset:" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="525.0" AnchorPane.topAnchor="144.0">
+                                    <Label layoutX="6.0" layoutY="144.0" prefHeight="16.0" prefWidth="52.0" text="Preset:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="525.0" AnchorPane.topAnchor="144.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="Preset" layoutX="103.0" layoutY="140.0" prefWidth="150.0" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="144.0" />
+                                    <ComboBox fx:id="Preset" layoutX="103.0" layoutY="140.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="144.0" />
                                     <Text layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Output Destination:" AnchorPane.bottomAnchor="13.93408203125" AnchorPane.leftAnchor="0.0" />
                                     <TextField fx:id="textDest" layoutX="135.0" layoutY="319.0" prefHeight="26.0" prefWidth="365.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="83.0" />
                                     <Button layoutX="517.0" layoutY="319.0" mnemonicParsing="false" onAction="#set_destination" text="Browse" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="0.0" />

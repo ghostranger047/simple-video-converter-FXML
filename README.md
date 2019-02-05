@@ -1,6 +1,5 @@
 
-#
-Simple Video Converter  
+# Simple Video Converter  
 
 A simple media project designed for easy conversion of video file for both linux and windows platform.  
 This project should also theoretically run on MacOS.
