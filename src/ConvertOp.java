@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,16 +70,24 @@ public class ConvertOp extends Thread
 
            Ui.textCurrentFile.setText(currentLoc);
 
-           List<String> arg = new ArrayList<>();
            String currentFile = currentLoc.substring(currentLoc.lastIndexOf('/')+1);
            currentFile = currentFile.substring(0, currentFile.lastIndexOf('.'));
 
-           arg.add("ffmpeg");
-           String str_op = Ui.dest.getPath() + "/" + currentFile + "." + Ui.str_format;
-           arg.add("-i"); arg.add(currentLoc); arg.add(str_op);
-           System.out.println(str_op);
+           new File(Ui.dest.getPath() + "/SVC/").mkdir();
+
+           String str_op = Ui.dest.getPath() + "/SVC/" + currentFile + "." + Ui.str_format;
+
+
+
+           String args = "ffmpeg -i " + currentLoc + " -crf " + Ui.Crf.getText() +
+                   " -r " + Ui.FrameRate.getText() + " -preset " + Ui.Preset + " " + str_op;
+
+
+
+           List<String> arg = Arrays.asList(args.split(" "));
+           System.out.println(args + "\n" + arg);
            ProcessBuilder p = new ProcessBuilder(arg);
-           System.out.println(currentFile);
+           //System.out.println(currentFile);
 
 
 

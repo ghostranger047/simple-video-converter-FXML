@@ -80,12 +80,19 @@ public class Controller implements Initializable
         FrameRate.setMaxWidth(40);FrameRate.setMaxHeight(30);
         FrameRate.setText("30");
 
+        Preset.setValue("fast");
+
         Slider.setValue(22);
         Crf.setText(Integer.toString((int)Slider.getValue()));
 
-        Slider.setMin(0); Slider.setMax(100);
+        Slider.setMin(0); Slider.setMax(51);
+        Slider.setShowTickLabels(true); Slider.setShowTickMarks(true);
+        Slider.setMajorTickUnit(22);
+        Slider.setMinorTickCount(51);
+        Slider.setBlockIncrement(1);
 
-        Preset.getItems().addAll("ultrafast", 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow')
+        Preset.getItems().addAll("ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow");
+
 
 
     }
@@ -121,7 +128,7 @@ public class Controller implements Initializable
         }
 
         //ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear, textCurrentFile, dest.getAbsolutePath()+"/");
-        System.out.println(dest.getAbsolutePath());
+        //System.out.println(dest.getAbsolutePath());
     }
 
     @FXML
@@ -147,7 +154,27 @@ public class Controller implements Initializable
     @FXML
     public void convert_clicked(ActionEvent event)
     {
-        ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear, textCurrentFile, dest, FrameRate, Crf, Preset.getValue());
+
+
+        if(textDest.getText().equals("") || files.isEmpty() == true)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("You may not have made appropriate selections!");
+            alert.setContentText("Please make sure you've added at least one file.\n" +
+                    "Please check you've selected a destination in \n\"Additional Settings\" Tab.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+            return;
+        }
+
+
+        ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear,
+                textCurrentFile, dest, FrameRate, Crf, Preset.getValue());
+
 
 
         op= new ConvertOp(ui);
@@ -162,6 +189,8 @@ public class Controller implements Initializable
     {
         DirectoryChooser d =new DirectoryChooser();
         d.setTitle("Destination");
+
+
 
         stg = (Stage)borderPane.getScene().getWindow();
         dest = d.showDialog(stg);
