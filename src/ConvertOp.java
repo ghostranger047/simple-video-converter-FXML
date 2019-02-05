@@ -78,19 +78,27 @@ public class ConvertOp extends Thread
            String currentFile = currentLoc.substring(currentLoc.lastIndexOf(dir)+1);
            currentFile = currentFile.substring(0, currentFile.lastIndexOf('.'));
 
+
+
            new File(Ui.dest.getPath() + dir + "SVC" + dir).mkdir();
 
-           String str_op = Ui.dest.getPath() + dir + "SVC" + dir + currentFile + "." + Ui.str_format;
+           String str_op = Ui.dest.getPath() + dir + "SVC" + dir  + currentFile + "." + Ui.str_format;
+
+           List<String> arg = new ArrayList<>();
+
+           arg.add("ffmpeg"); arg.add("-i");
+           arg.add(currentLoc);
+
+           String args = "-crf " + Ui.Crf.getText() +
+                   " -r " + Ui.FrameRate.getText() + " -preset " + Ui.Preset;
+
+           arg.addAll(Arrays.asList(args.split(" ")));
+           arg.add(str_op);
 
 
 
-           String args = "ffmpeg -i " + currentLoc + " -crf " + Ui.Crf.getText() +
-                   " -r " + Ui.FrameRate.getText() + " -preset " + Ui.Preset + " " + str_op;
 
-
-
-           List<String> arg = Arrays.asList(args.split(" "));
-           System.out.println(args + "\n" + arg);
+           System.out.println(arg);
            ProcessBuilder p = new ProcessBuilder(arg);
            //System.out.println(currentFile);
 
@@ -129,7 +137,11 @@ public class ConvertOp extends Thread
                         else
                         {
                             //System.out.println((durations.get(i-1) + dou_progress)/tot_dur);
-                            Ui.progBarTotal.setProgress((Ui.durations.get(i-1) + dou_progress)/tot_dur);
+                            double tmp=0.0;
+                            for(int j=0;j <i;j++)
+                                tmp += Ui.durations.get(j);
+
+                            Ui.progBarTotal.setProgress((tmp + dou_progress)/tot_dur);
                         }
 
                         //progBarTotal.setProgress(total_done/tot_dur);
