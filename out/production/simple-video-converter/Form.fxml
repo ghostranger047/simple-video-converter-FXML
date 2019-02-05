@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -48,15 +48,23 @@
                            <font>
                               <Font size="15.0" />
                            </font></Label>
-                        <ProgressBar fx:id="progBarCurrent" layoutY="238.0" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <ProgressBar fx:id="progBarTotal" layoutX="-14.0" layoutY="281.0" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Label layoutX="-1.0" layoutY="265.0" text="Total:" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" />
-                        <Button fx:id="Open" layoutX="72.0" layoutY="315.0" mnemonicParsing="false" onAction="#open_file" prefHeight="26.0" prefWidth="55.0" text="Open" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="72.0" />
-                        <Button fx:id="Start" layoutX="201.0" layoutY="315.0" mnemonicParsing="false" onAction="#convert_clicked" text="Start" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="201.0" />
-                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" onAction="#stop" text="Stop" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="235.0" />
-                        <Button fx:id="Clear" layoutX="442.0" layoutY="315.0" mnemonicParsing="false" onAction="#clear_queue" text="Clear Queue" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="72.0" />
-                        <Separator layoutY="311.0" prefHeight="0.0" prefWidth="609.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <ProgressBar fx:id="progBarCurrent" layoutY="238.0" prefHeight="20.0" prefWidth="543.0" progress="0.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="64.0" />
+                        <ProgressBar fx:id="progBarTotal" layoutX="-14.0" layoutY="281.0" prefHeight="20.0" prefWidth="545.0" progress="0.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="64.0" />
+                        <Label layoutX="-1.0" layoutY="265.0" text="Total:" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="0.0" />
+                        <Button fx:id="Open" layoutX="72.0" layoutY="315.0" mnemonicParsing="false" onAction="#open_file" prefHeight="26.0" prefWidth="55.0" text="Open" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="72.0" />
+                        <Button fx:id="Start" layoutX="201.0" layoutY="315.0" mnemonicParsing="false" onAction="#convert_clicked" text="Start" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="201.0" />
+                        <Button fx:id="Stop" layoutX="312.0" layoutY="323.0" mnemonicParsing="false" onAction="#stop" text="Stop" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="235.0" />
+                        <Button fx:id="Clear" layoutX="442.0" layoutY="315.0" mnemonicParsing="false" onAction="#clear_queue" text="Clear Queue" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="72.0" />
+                        <Separator layoutY="311.0" prefHeight="0.0" prefWidth="609.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <TextField fx:id="textCurrentFile" layoutX="92.0" layoutY="209.0" prefHeight="0.0" prefWidth="171.0" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="0.0" />
+                        <TextField fx:id="CurrentPercent" layoutX="551.0" layoutY="227.0" prefHeight="22.0" prefWidth="60.0" AnchorPane.bottomAnchor="101.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font></TextField>
+                        <TextField fx:id="TotalPercent" layoutX="550.0" layoutY="270.0" prefHeight="22.0" prefWidth="59.0" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font></TextField>
                      </children>
                   </AnchorPane>
             </content>
@@ -81,7 +89,7 @@
                                        </font>
                                     </Label>
                                     <Slider fx:id="Slider" layoutX="99.0" layoutY="99.0" onMouseDragged="#set_crf" prefHeight="16.0" prefWidth="474.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="98.0" />
-                                    <TextField fx:id="Crf" layoutX="100.0" layoutY="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="75.0">
+                                    <TextField fx:id="Crf" layoutX="107.0" layoutY="66.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="66.0">
                                        <font>
                                           <Font size="12.0" />
                                        </font>

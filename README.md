@@ -12,6 +12,7 @@ Language: Java(FXML)
         (Note for Oracle JRE 11 FXML is needed to be installed as module separately).  
       
     2) FFMPEG (Should be present in system path in Windows)
+    3) x264 codec
     
     
     

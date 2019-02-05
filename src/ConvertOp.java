@@ -8,10 +8,13 @@ import java.io.File;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public class ConvertOp extends Thread
 {
@@ -168,15 +171,19 @@ public class ConvertOp extends Thread
                         String time[] = progress.split(":");
                         double dou_progress = (3600 * Double.parseDouble(time[0])) +
                                 (60 * Double.parseDouble(time[1])) + Double.parseDouble(time[2]);
-                        //System.out.println(dou_progress);
 
 
-                        Ui.progBarCurrent.setProgress(dou_progress/Ui.durations.get(i));
+
+                        Double val_current = dou_progress/Ui.durations.get(i);
+
+                        Ui.progBarCurrent.setProgress(val_current);
+                        Ui.CurrentPercent.setText(Double.toString(val_current*100.0).substring(0,5) +"%");
 
                         if(i == 0)
                         {
                             //System.out.println(dou_progress/tot_dur);
                             Ui.progBarTotal.setProgress(dou_progress/tot_dur);
+                            Ui.TotalPercent.setText(Double.toString((dou_progress)/tot_dur*100.0).substring(0,5) + "%");
                         }
 
                         else
@@ -187,6 +194,7 @@ public class ConvertOp extends Thread
                                 tmp += Ui.durations.get(j);
 
                             Ui.progBarTotal.setProgress((tmp + dou_progress)/tot_dur);
+                            Ui.TotalPercent.setText(Double.toString((tmp + dou_progress)/tot_dur*100.0).substring(0,5) + "%");
                         }
 
                         //progBarTotal.setProgress(total_done/tot_dur);
@@ -214,6 +222,8 @@ public class ConvertOp extends Thread
        }
        System.out.println("Ended");
        Ui.textCurrentFile.setText("Task Completed");
+       Ui.CurrentPercent.setText("100%");
+       Ui.TotalPercent.setText("100%");
        toggle_buttons(0);
 
        //files.clear();

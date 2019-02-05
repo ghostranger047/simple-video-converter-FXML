@@ -30,7 +30,7 @@ public class Controller implements Initializable
     @FXML
     private BorderPane borderPane;
     @FXML
-    private TextField textCurrentFile, Crf, FrameRate, textDest;
+    private TextField textCurrentFile, Crf, FrameRate, textDest, CurrentPercent, TotalPercent;
     @FXML
     private ListView<File> listViewFiles;
     @FXML
@@ -97,6 +97,7 @@ public class Controller implements Initializable
 
         Preset.getItems().addAll("ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow");
 
+        CurrentPercent.setEditable(false); TotalPercent.setEditable(false);
 
 
     }
@@ -177,7 +178,7 @@ public class Controller implements Initializable
 
 
         ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear,
-                textCurrentFile, dest, FrameRate, Crf, Preset.getValue());
+                textCurrentFile, dest, FrameRate, Crf, Preset.getValue(), CurrentPercent, TotalPercent);
 
         ui.flag = 1;
 
@@ -201,6 +202,8 @@ public class Controller implements Initializable
         Clear.setDisable(false);
         progBarCurrent.setProgress(0.0);
         progBarTotal.setProgress(0.0);
+        CurrentPercent.setText("0.0%");
+        TotalPercent.setText("0.0%");
     }
 
     @FXML
