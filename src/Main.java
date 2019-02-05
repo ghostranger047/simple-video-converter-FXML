@@ -18,6 +18,14 @@ public class Main extends Application
         primaryStage.show();
     }
 
+    @Override
+    public void stop()
+    {
+        System.out.println("Stop");
+        ConvertOp.process.destroy();
+        System.exit(0);
+    }
+
 
     public static void main(String[] args) {
         launch(args);

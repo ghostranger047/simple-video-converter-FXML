@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 
 import java.io.File;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +17,45 @@ public class ConvertOp extends Thread
 {
 
     UIElements Ui;
+
+    public static Process process = new Process()
+    {
+        @Override
+        public OutputStream getOutputStream()
+        {
+            return null;
+        }
+
+        @Override
+        public InputStream getInputStream()
+        {
+            return null;
+        }
+
+        @Override
+        public InputStream getErrorStream()
+        {
+            return null;
+        }
+
+        @Override
+        public int waitFor() throws InterruptedException
+        {
+            return 0;
+        }
+
+        @Override
+        public int exitValue()
+        {
+            return 0;
+        }
+
+        @Override
+        public void destroy()
+        {
+
+        }
+    };
 
 
 
@@ -102,7 +143,7 @@ public class ConvertOp extends Thread
            ProcessBuilder p = new ProcessBuilder(arg);
            //System.out.println(currentFile);
 
-           Process process = null;
+
 
            try
             {
@@ -112,9 +153,13 @@ public class ConvertOp extends Thread
                 while(sc.hasNextLine())
                 {
                     String op = sc.nextLine();
-                    //System.out.println(op.length());
+                    System.out.println(op);
                     if(Ui.flag == 0)
+                    {
+                        process.destroy();
                         return;
+                    }
+
 
                     if(op.indexOf("time=") != -1)
                     {
@@ -173,4 +218,6 @@ public class ConvertOp extends Thread
 
        //files.clear();
     }
+
+
 }
