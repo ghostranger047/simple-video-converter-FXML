@@ -26,9 +26,9 @@ Execution:
    
 ##
 Screen Shots:  
-![Alt text](screens/3.png?raw=true "Main Window")  
-![Alt text](screens/1.png?raw=true "Main")  
-![Alt text](screens/2.png?raw=true "Additional settings")    
+![Alt text](screen/3.png?raw=true "Main Window")  
+![Alt text](screen/1.png?raw=true "Main")  
+![Alt text](screen/2.png?raw=true "Additional settings")    
     
       
 
