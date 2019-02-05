@@ -5,6 +5,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -60,7 +62,7 @@ public class Controller implements Initializable
     public void initialize(URL location, ResourceBundle resources)
     {
         System.out.println("Initialized");
-        Open.setText("Open");
+
         Stop.setDisable(true);
 
         open_ext = new ArrayList<>();
@@ -76,6 +78,8 @@ public class Controller implements Initializable
         //Stop.setDisable(true);
         Crf.setMaxWidth(40); Crf.setMaxHeight(30);
         Crf.setEditable(false);
+
+
 
         FrameRate.setMaxWidth(40);FrameRate.setMaxHeight(30);
         FrameRate.setText("30");
@@ -194,7 +198,7 @@ public class Controller implements Initializable
 
         stg = (Stage)borderPane.getScene().getWindow();
         dest = d.showDialog(stg);
-        textDest.setText(dest.getPath() + "/");
+        textDest.setText(dest.getPath());
 
     }
 

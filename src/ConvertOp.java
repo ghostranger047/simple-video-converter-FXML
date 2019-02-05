@@ -65,17 +65,22 @@ public class ConvertOp extends Thread
 
            Ui.progBarCurrent.setProgress(0.0);
            String currentLoc = file.getAbsoluteFile().toString();
-
-
+           String dir = "";
+           String os =System.getProperty("os.name").toLowerCase();
+           System.out.println(os.indexOf("windows"));
+           if(os.indexOf("windows") != -1)
+               dir = "\\";
+           else
+               dir = "/";
 
            Ui.textCurrentFile.setText(currentLoc);
 
-           String currentFile = currentLoc.substring(currentLoc.lastIndexOf('/')+1);
+           String currentFile = currentLoc.substring(currentLoc.lastIndexOf(dir)+1);
            currentFile = currentFile.substring(0, currentFile.lastIndexOf('.'));
 
-           new File(Ui.dest.getPath() + "/SVC/").mkdir();
+           new File(Ui.dest.getPath() + dir + "SVC" + dir).mkdir();
 
-           String str_op = Ui.dest.getPath() + "/SVC/" + currentFile + "." + Ui.str_format;
+           String str_op = Ui.dest.getPath() + dir + "SVC" + dir + currentFile + "." + Ui.str_format;
 
 
 
@@ -89,11 +94,11 @@ public class ConvertOp extends Thread
            ProcessBuilder p = new ProcessBuilder(arg);
            //System.out.println(currentFile);
 
+           Process process = null;
 
-
-            try
+           try
             {
-                Process process = p.start();
+                process = p.start();
                 Scanner sc = new Scanner(process.getErrorStream());
 
                 while(sc.hasNextLine())
@@ -131,14 +136,21 @@ public class ConvertOp extends Thread
                     }
 
                 }
-                process.waitFor();
+
             }
             catch(Exception e)
             {
                 //System.out.println(e);
                 toggle_buttons(0);
             }
-            i = i+1;
+           try
+           {
+               process.waitFor();
+           } catch (InterruptedException e)
+           {
+               e.printStackTrace();
+           }
+           i = i+1;
 
 
        }
