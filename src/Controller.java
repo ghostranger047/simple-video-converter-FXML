@@ -19,6 +19,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -193,17 +194,30 @@ public class Controller implements Initializable
     @FXML
     public void stop(ActionEvent event)
     {
-        ui.flag = 0;
-        op.interrupt();
-        textCurrentFile.setText("Interrupted by User!");
-        Stop.setDisable(true);
-        Open.setDisable(false);
-        Start.setDisable(false);
-        Clear.setDisable(false);
-        progBarCurrent.setProgress(0.0);
-        progBarTotal.setProgress(0.0);
-        CurrentPercent.setText("0.0%");
-        TotalPercent.setText("0.0%");
+
+        Alert alert =new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Alert");
+        alert.setContentText("Do you really want to Stop?");
+        Optional<ButtonType> result =alert.showAndWait();
+        if(result.get() == ButtonType.OK)
+        {
+            ui.flag = 0;
+            op.interrupt();
+
+            textCurrentFile.setText("Interrupted by User!");
+            Stop.setDisable(true);
+            Open.setDisable(false);
+            Start.setDisable(false);
+            Clear.setDisable(false);
+            progBarCurrent.setProgress(0.0);
+            progBarTotal.setProgress(0.0);
+            CurrentPercent.setText("0.0%");
+            TotalPercent.setText("0.0%");
+        }
+        else
+            return;
+
+
     }
 
     @FXML

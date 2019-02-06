@@ -2,7 +2,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class Main extends Application
 {
@@ -15,15 +20,22 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root, 700, 450));
         primaryStage.setMinHeight(455);
         primaryStage.setMinWidth(700);
+
+        primaryStage.setOnCloseRequest(event ->
+        {
+            stop_app();
+        });
+
         primaryStage.show();
     }
 
-    @Override
-    public void stop()
+
+    public void stop_app()
     {
         System.out.println("Stop");
         ConvertOp.process.destroy();
         System.exit(0);
+
     }
 
 
