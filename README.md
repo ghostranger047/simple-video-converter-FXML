@@ -13,7 +13,7 @@ Language: Java(FXML)
       
   
 2) FFMPEG:  
-   Ubuntu users:
+   Ubuntu users:  
     sudo apt install ffmpeg    
    Window users:  
       1) Download ffmpeg:  
