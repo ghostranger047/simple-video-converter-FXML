@@ -14,7 +14,7 @@ Language: Java(FXML)
   
 2) FFMPEG:  
    Ubuntu users:  
-      sudo apt install ffmpeg  
+   + sudo apt install ffmpeg  
    Window users:  
       1) Download ffmpeg:  
             [Download](https://ffmpeg.zeranoe.com/builds/)                        
