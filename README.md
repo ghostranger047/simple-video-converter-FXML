@@ -19,8 +19,8 @@ Language: Java(FXML)
    Window users:  
       1) Download ffmpeg:  
             [Download](https://ffmpeg.zeranoe.com/builds/)                        
-      2) Extract the zip in the folder where the jar is  
-      3) Rename the ffmpeg extracted folder to "ffmpeg"  
+      2) Extract the zip in the folder where the jar is located.  
+      3) Rename the extracted folder to "ffmpeg".  
             
     
     
