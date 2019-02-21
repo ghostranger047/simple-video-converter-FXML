@@ -25,7 +25,7 @@ Language: Java(FXML)
     
     
 ## Execution:  
-   Download and execute the jar file from [here](simple-video-converter/out/artifacts/simple_video_converter_jar/)   
+   Download and execute the jar file from [here](simple-video-converter-FXML/tree/master/out/artifacts/simple_video_converter_jar/)   
    Double Click to execute.  
    ** If Due to some reason the jar file doesn't exexute open terminal/cmd.exe as per your os and type:  
    java -jar simple-video-converter.jar  
