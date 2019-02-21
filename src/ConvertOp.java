@@ -112,10 +112,22 @@ public class ConvertOp extends Thread
            String dir = "";
            String os =System.getProperty("os.name").toLowerCase();
            System.out.println(os.indexOf("windows"));
+
+           List<String> arg = new ArrayList<>();
+
            if(os.indexOf("windows") != -1)
+           {
                dir = "\\";
+               arg.add(System.getProperty("user.dir") + "\\ffmpeg\\bin\\ffmpeg.exe");
+
+           }
+
            else
+           {
                dir = "/";
+               arg.add("ffmpeg");
+           }
+
 
            Ui.textCurrentFile.setText(currentLoc);
 
@@ -128,9 +140,9 @@ public class ConvertOp extends Thread
 
            String str_op = Ui.dest.getPath() + dir + "SVC" + dir  + currentFile + "." + Ui.str_format;
 
-           List<String> arg = new ArrayList<>();
 
-           arg.add("ffmpeg"); arg.add("-i");
+
+           arg.add("-i");
            arg.add(currentLoc);
 
            String args = "-c:v libx264 -preset " + Ui.Preset +

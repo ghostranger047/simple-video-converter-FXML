@@ -1,20 +1,19 @@
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.plaf.synth.SynthEditorPaneUI;
+import javax.sound.midi.SysexMessage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -245,7 +244,29 @@ public class Controller implements Initializable
     {
 
 
-        System.exit(1);
+        if(ConvertOp.process.isAlive() == true)
+        {
+            Alert alert =new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Alert");
+            alert.setHeaderText("An ongoing operation is in progress");
+            alert.setContentText("Do you really want to Stop?");
+            Optional<ButtonType> result =alert.showAndWait();
+            if(result.get() == ButtonType.OK)
+            {
+                ConvertOp.process.destroy();
+                op.interrupt();
+                System.exit(0);
+            }
+            else
+                return;
+        }
+        else
+        {
+            ConvertOp.process.destroy();
+            op.interrupt();
+            System.exit(0);
+        }
+
 
     }
 

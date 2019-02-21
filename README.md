@@ -11,8 +11,16 @@ Language: Java(FXML)
     1) Oracle JRE 8 or above  
         (Note for Oracle JRE 11 FXML is needed to be installed as module separately).  
       
-    2) FFMPEG (Should be present in system path in Windows)
-    3) x264 codec
+  
+    2) FFMPEG (Should be present in system path in Windows)  
+        [ Ubuntu users:  
+            sudo apt install ffmpeg  
+          Window users:  
+            1) Download ffmpeg:  
+                [Downloaad](https://ffmpeg.zeranoe.com/builds/)  
+            2) Extract the zip in the folder where the jar is  
+            3) Rename the ffmpeg extracted folder to "ffmpeg"  
+            
     
     
     

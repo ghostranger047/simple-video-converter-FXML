@@ -13,13 +13,24 @@ public class FFProbe
     {
         List<Double> durations = new ArrayList<>();
 
+        String ffprobe = "";
+        String os =System.getProperty("os.name").toLowerCase();
+        if(os.indexOf("windows") != -1)
+            ffprobe = System.getProperty("user.dir") + "\\ffmpeg\\bin\\ffprobe.exe";
+        else
+            ffprobe = "ffprobe";
+
         for(File file : dests)
         {
+
+
+
+
             String current_file = file.getAbsolutePath();
             //System.out.println(current_file);
             List<String> arg;
 
-            String str_arg[] = {"ffprobe", "-i", current_file, "-show_entries", "format=duration", "-v", "quiet"};
+            String str_arg[] = {ffprobe, "-i", current_file, "-show_entries", "format=duration", "-v", "quiet"};
             arg = Arrays.asList(str_arg);
             ProcessBuilder p = new ProcessBuilder(str_arg);
 
