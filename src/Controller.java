@@ -66,7 +66,7 @@ public class Controller implements Initializable
         Stop.setDisable(true);
 
         open_ext = new ArrayList<>();
-        open_ext.add("*.mp4"); open_ext.add("*.avi"); open_ext.add("*.mkv"); open_ext.add("*.wmv");
+        open_ext.add("*.*");
         formats = FXCollections.observableArrayList("avi", "mp4", "mkv");
         listViewFormats.setItems(formats);
         listViewFormats.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -108,7 +108,7 @@ public class Controller implements Initializable
         System.out.println("open");
         FileChooser fc = new FileChooser();
         fc.setTitle("Videos");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Videos", open_ext));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", open_ext));
         stg = (Stage)borderPane.getScene().getWindow();
         List<File> fs = fc.showOpenMultipleDialog(stg);
 
