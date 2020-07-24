@@ -67,7 +67,7 @@ public class Controller implements Initializable
 
         open_ext = new ArrayList<>();
         open_ext.add("*.*");
-        formats = FXCollections.observableArrayList("avi", "mp4", "mkv");
+        formats = FXCollections.observableArrayList("avi", "mp4", "mkv", "ts");
         listViewFormats.setItems(formats);
         listViewFormats.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         files = FXCollections.observableArrayList();
