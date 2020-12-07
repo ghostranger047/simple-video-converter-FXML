@@ -149,6 +149,7 @@ public class ConvertOp extends Thread
                 args = "-c:v libx264 -preset " + Ui.Preset +
                    " -crf " + Ui.Crf.getText() + " -r " + Ui.FrameRate.getText();
            else
+               //GPU acceleration configs
                 args = "-vaapi_device /dev/dri/renderD128 -vf format=nv12,hwupload -c:v h264_vaapi -preset " + Ui.Preset +
                         " -crf " + Ui.Crf.getText() + " -r " + Ui.FrameRate.getText();
 
