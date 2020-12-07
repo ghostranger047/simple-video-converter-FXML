@@ -1,5 +1,6 @@
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
@@ -16,14 +17,14 @@ public class UIElements
     public static List<Double> durations;
     public static Button Open, Start, Stop, Clear;
     public static File dest;
-
+    public static CheckBox gpu;
     int flag;
 
 
 
     public UIElements(ObservableList<File> files, String str_format, ProgressBar progBarCurrent, ProgressBar progBarTotal,
                       List<Double> durations, Button Open, Button Start, Button Stop, Button Clear, TextField textCurrentFile, File dest, TextField FrameRate,
-                       TextField Crf, String Preset, TextField CurrentPercent, TextField TotalPercent)
+                      TextField Crf, String Preset, TextField CurrentPercent, TextField TotalPercent, CheckBox gpu)
     {
         this.textCurrentFile = textCurrentFile;
 
@@ -44,6 +45,7 @@ public class UIElements
         this.Preset = Preset;
         this.CurrentPercent = CurrentPercent;
         this.TotalPercent = TotalPercent;
+        this.gpu = gpu;
         flag = 1;
     }
 }

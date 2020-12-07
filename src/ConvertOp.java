@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import java.io.File;
 
 import java.io.InputStream;
@@ -127,7 +128,7 @@ public class ConvertOp extends Thread
                dir = "/";
                arg.add("ffmpeg");
            }
-
+           //ffmpeg -vaapi_device /dev/dri/renderD128 -i input.mp4 -vf 'format=nv12,hwupload' -c:v h264_vaapi output.mp4
 
            Ui.textCurrentFile.setText(currentLoc);
 
@@ -140,13 +141,16 @@ public class ConvertOp extends Thread
 
            String str_op = Ui.dest.getPath() + dir + "SVC" + dir  + currentFile + "." + Ui.str_format;
 
-
+           String args = "";
 
            arg.add("-i");
            arg.add(currentLoc);
-
-           String args = "-c:v libx264 -preset " + Ui.Preset +
+           if(Ui.gpu.isSelected() == false)
+                args = "-c:v libx264 -preset " + Ui.Preset +
                    " -crf " + Ui.Crf.getText() + " -r " + Ui.FrameRate.getText();
+           else
+                args = "-vaapi_device /dev/dri/renderD128 -vf format=nv12,hwupload -c:v h264_vaapi -preset " + Ui.Preset +
+                        " -crf " + Ui.Crf.getText() + " -r " + Ui.FrameRate.getText();
 
            arg.addAll(Arrays.asList(args.split(" ")));
            arg.add(str_op);

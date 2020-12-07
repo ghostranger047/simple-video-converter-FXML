@@ -41,6 +41,7 @@ public class Controller implements Initializable
     private Slider Slider;
     @FXML
     private ComboBox<String> Preset;
+    @FXML private CheckBox gpu;
 
     private File dest;
 
@@ -178,7 +179,7 @@ public class Controller implements Initializable
 
 
         ui =new UIElements(files, str_format, progBarCurrent, progBarTotal, list_durations, Open, Start, Stop, Clear,
-                textCurrentFile, dest, FrameRate, Crf, Preset.getValue(), CurrentPercent, TotalPercent);
+                textCurrentFile, dest, FrameRate, Crf, Preset.getValue(), CurrentPercent, TotalPercent, gpu);
 
         ui.flag = 1;
 
